@@ -4,7 +4,7 @@ allow-lan: true
 mode: rule
 log-level: info
 ipv6: false
-external-controller: 0.0.0.0:9090
+external-controller: 0.0.0.0:9090   # 必须写 0.0.0.0，不要写 127.0.0.1
 
 dns:
   enable: true
@@ -36,7 +36,7 @@ sniffer:
     HTTP:
       ports: [80, 8080-8880]
 
-# ⚠️这三行就是留给系统的合法“空篮子”，绝不能删！
+# ⚠️这三行就是留给系统的合法“空篮子”，绝不能删！subconverter 会自动把节点、组、规则填进去
 proxies: []
 proxy-groups: []
 rules: []
