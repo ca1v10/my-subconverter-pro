@@ -1,0 +1,52 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+ipv6: false
+external-controller: :9090
+
+# === 1. 顶级 DNS 防污染与解析加速 ===
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - '*.lan'
+    - 'localhost.ptlogin2.qq.com'
+    - 'dns.msftncsi.com'
+    - 'www.msftncsi.com'
+    - 'www.msftconnecttest.com'
+  nameserver:
+    - 119.29.29.29
+    - 223.5.5.5
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  fallback:
+    - 8.8.8.8
+    - 1.1.1.1
+    - https://dns.google/dns-query
+    - tls://8.8.4.4:853
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+
+# === 2. 隐身克星：全局流量嗅探 ===
+sniffer:
+  enable: true
+  force-domain:
+    - '+'
+  sniff:
+    TLS:
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080-8880]
+
+# 下面这两行必须保留，告诉转换器把节点和策略组插在这里
+proxies: ~
+proxy-groups: ~
+rules: ~
