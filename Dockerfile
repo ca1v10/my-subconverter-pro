@@ -1,2 +1,3 @@
 FROM tindy2013/subconverter:latest
-RUN echo "=== 内部文件地图 ===" && find /base /subconverter /app -type f 2>/dev/null; exit 1
+# 将我们的配置文件直接覆盖到程序的偏好设置中
+COPY pref.toml /base/pref.toml
