@@ -1,4 +1,5 @@
 [general]
-clash_rule_base = clash_base.yaml
+base_path = "base"
+clash_rule_base = "clash_base.yaml"
 enable_rule_generator = true
 overwrite_original_rules = true
